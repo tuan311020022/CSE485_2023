@@ -41,12 +41,31 @@ HAVING COUNT(*) >= ( SELECT top(2)* MAX(SO_LAN_XUAT_HIEN_nhieu_nhat)
                        from (SELECT COUNT(*) AS SO_LAN_XUAT_HIEN_nhieu_nhat
                                FROM baiviet
                               GROUP BY ma_tgia) TMP);
+SELECT ma_tgia, COUNT(*)  SO_LAN_XUAT_HIEN_nhieu_nhat
+from baiviet
+ GROUP BY ma_tgia
+HAVING COUNT(*) >= ( SELECT top(2)* MAX(SO_LAN_XUAT_HIEN_nhieu_nhat)
+                       from (SELECT COUNT(*) AS SO_LAN_XUAT_HIEN_nhieu_nhat
+                               FROM baiviet
+                              GROUP BY ma_tgia) TMP);
 /*liệt kê các bài viết có tự bài hát chứa 1 trong các từ "yêu","thương","anh","em"*/
-SELECT*from baiviet where ten_bhat like '%yêu%';
-SELECT*from baiviet where ten_bhat like '%thương%';
-SELECT*from baiviet where ten_bhat like '%anh%';
-SELECT*from baiviet where ten_bhat like '%em%';
+SELECT*from baiviet where ten_bhat like '%yêu%'or  ten_bhat like '%thương%' or ten_bhat like '%anh%'or ten_bhat like '%em%';
 
 /*Liệt kê các bài viết về các bài hát có tiêu đề bài viết hoặc tựa bài hát chứa 1 trong các từ  "yêu","thương","anh","em"*/
 
-select*from baiviet where tieude or ten_bhat
+select*from baiviet where ten_bhat like '%yêu%'or  ten_bhat like '%thương%' or ten_bhat like '%anh%'or ten_bhat like '%em%'or tieude  like '%yêu%' or tieude  like '%thương%' or tieude  like '%anh%' or tieude  like '%em%';
+
+--  Bổ sung thêm bảng Users để lưu thông tin Tài khoản đăng nhập và sử dụng cho chức năng  Đăng nhập/Quản trị trang web
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_name` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `user_name`, `password`) VALUES
+(1, 'admin1', 'admin1'),
+(2, 'admin2', 'admin2');
