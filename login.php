@@ -51,23 +51,58 @@
                             <span><i class="fab fa-twitter-square"></i></span>
                         </div>
                     </div>
+
+
+                <?php 
+                
+              
+                
+                //Xử lý đăng nhập
+                
+                if (isset($_POST['btnlogin'])==true) {
+                    $tendangnhap = $_POST['txtUsername'];
+                    $matkhau = $_POST['txtPassword'];
+                   
+                    $conn =new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8","root","");
+                    $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                   // Kiểm tra đã nhập đủ tên đăng nhập với mật khẩu chưa
+                    if (! $tendangnhap || ! $matkhau) {
+                        echo "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu. <a href='javascript: history.go(-1)'>Trở lại</a>";
+                        exit;
+                    }
+                    $sql = "select * from users where user_name = ? and password = ?";
+                    $stmt = $conn->prepare($sql) ;
+                    $stmt->execute([$tendangnhap,$matkhau]);
+                   if ($stmt->rowCount()==1){
+                   $user = $stmt->fetch();
+                   header("location:index.php");
+                   }else{
+                    echo "<p style='text-align: center; '> Đăng nhập sai.Vui lòng đăng nhập lại  </p>";
+                   }
+
+
+                }
+                   
+        
+                
+                ?>
                     <div class="card-body">
-                        <form>
+                        <form action="login.php" method="post">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="username" >
+                                <input type="text" name="txtUsername" class="form-control" placeholder="username"  >
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
-                                <input type="text" class="form-control" placeholder="password" >
+                                <input type="password" name="txtPassword" class="form-control" placeholder="password" >
                             </div>
                             
                             <div class="row align-items-center remember">
                                 <input type="checkbox">Remember Me
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Login" class="btn float-end login_btn">
+                                <input type="submit" name="btnlogin" value="Login" class="btn float-end login_btn" >
                             </div>
                         </form>
                     </div>
