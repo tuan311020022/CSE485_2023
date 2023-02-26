@@ -76,7 +76,8 @@
                    if ($stmt->rowCount()==1){
                    $user = $stmt->fetch();
                    header("location:index.php");
-                   }else{
+                   }
+                 else{
                     echo "<p style='text-align: center; '> Đăng nhập sai.Vui lòng đăng nhập lại  </p>";
                    }
 
