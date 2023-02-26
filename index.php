@@ -67,60 +67,28 @@
     <main class="container-fluid mt-3">
         <h3 class="text-center text-uppercase mb-3 text-primary">TOP bài hát yêu thích</h3>
         <div class="row">
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/cayvagio.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="detail.php" class="text-decoration-none">Cây, lá và gió</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
+            <?php
+                $servername = "localhost";
+                $username = "root";
+                $password = "25122019";
 
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/csmt.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="detail.php" class="text-decoration-none">Cuộc sống mến thương</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs//longme.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="detail.php" class="text-decoration-none">Lòng mẹ</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/phoipha.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">
-                            <a href="detail.php" class="text-decoration-none">Phôi pha</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/noitinhyeubatdau.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center my-title">
-                            <a href="detail.php" class="text-decoration-none">Nơi tình yêu bắt đầu</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
+                #macbook
+                $conn =new PDO("mysql:host=localhost:3306;dbname=btth01_cse485","root","25122019");
+                $data = $conn->query("SELECT * FROM baiviet")->fetchAll();
+                foreach ($data as $row) {
+                    echo    "<div class='col-sm-3'>
+                                <div class='card mb-2' style='width: 100%;'>
+                                    <img src='".$row['hinhanh']."' class='card-img-top' alt='...'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title text-center'>
+                                            <a href='detail.php?id=".$row['ma_bviet']." class='text-decoration-none'>".$row['tieude']."</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>";                    
+                }
+                $conn = null
+            ?>
         </div>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
