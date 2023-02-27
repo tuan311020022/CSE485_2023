@@ -161,3 +161,18 @@ CREATE TABLE `acountadmin` (
 
 INSERT INTO `acountadmin` (`id`, `user`, `password`) VALUES
 (1, 'admin', 'admin123');
+
+
+UPDATE baiviet SET hinhanh = 'images/songs/longme.jpg' where ma_bviet = 1;
+UPDATE baiviet SET hinhanh = 'images/songs/vetmua.jpg' where ma_bviet = 2; 
+UPDATE baiviet SET hinhanh = 'images/songs/phoipha.jpg' where ma_bviet = 3;
+UPDATE baiviet SET hinhanh = 'images/songs/quehuong.jpg' where ma_bviet = 4;
+UPDATE baiviet SET hinhanh = 'images/songs/datnuoc.jpg' where ma_bviet = 5;
+UPDATE baiviet SET hinhanh = 'images/songs/hardrock.jpg' where ma_bviet = 6;
+UPDATE baiviet SET hinhanh = 'images/songs/TheUnforgiven.jpg' where ma_bviet = 7;
+UPDATE baiviet SET hinhanh = 'images/songs/noitinhyeubatdau.jpg' where ma_bviet = 8;
+UPDATE baiviet SET hinhanh = 'images/songs/loveme.jpg' where ma_bviet = 9;
+UPDATE baiviet SET hinhanh = 'images/songs/stronger.jpg' where ma_bviet = 10;
+UPDATE baiviet SET hinhanh = 'images/songs/csmt.jpg' where ma_bviet = 11;
+UPDATE baiviet SET hinhanh = 'images/songs/cayvagio.jpg' where ma_bviet = 12;
+UPDATE baiviet SET hinhanh = 'images/songs/nguoithay.jpg' where ma_bviet = 13;
