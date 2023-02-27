@@ -149,6 +149,19 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+CREATE TABLE `acountadmin` (
+  `id` int(11) NOT NULL,
+  `user` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `acountadmin`
+--
+
+INSERT INTO `acountadmin` (`id`, `user`, `password`) VALUES
+(1, 'admin', 'admin123');
+
 
 UPDATE baiviet SET hinhanh = 'images/songs/longme.jpg' where ma_bviet = 1;
 UPDATE baiviet SET hinhanh = 'images/songs/vetmua.jpg' where ma_bviet = 2; 
