@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link active fw-bold" aria-current="page" href="">Trang chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../index.php">Trang ngoài</a>
@@ -46,6 +46,27 @@
         </nav>
 
     </header>
+<?php
+   $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8", "root", "");
+   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+   $sql = "SELECT COUNT(*)FROM baiviet";
+   $sql1 = "SELECT COUNT(*)FROM theloai";
+   $sql2 = "SELECT COUNT(*)FROM tacgia";
+   $stmt = $conn->prepare($sql);
+   $stmt1 = $conn->prepare($sql1);
+   $stmt2 = $conn->prepare($sql2);
+   $stmt->execute();
+   $stmt1->execute();
+   $stmt2->execute();
+   $slbaiviet=$stmt->fetch();
+   $sltheloai=$stmt1->fetch();
+   $sltacgia=$stmt2->fetch();
+  
+
+   
+?>
+
+
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
@@ -71,7 +92,10 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            10
+                        <?php
+                               
+                               echo $sltheloai[0];
+                            ?>
                         </h5>
                     </div>
                 </div>
@@ -85,7 +109,10 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            20
+                        <?php
+                               
+                                echo $sltacgia[0];
+                            ?>
                         </h5>
                     </div>
                 </div>
@@ -99,7 +126,12 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            110
+                            <?php
+                                // echo    "<h5 class='h1 text-center'>
+                                //             ".$slbaiviet[0]."
+                                //         </h5>";
+                                echo $slbaiviet[0];
+                            ?>
                         </h5>
                     </div>
                 </div>
