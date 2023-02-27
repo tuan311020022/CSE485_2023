@@ -68,10 +68,6 @@
         <h3 class="text-center text-uppercase mb-3 text-primary">TOP bài hát yêu thích</h3>
         <div class="row">
             <?php
-                $servername = "localhost";
-                $username = "root";
-                $password = "25122019";
-
                 #macbook
                 $conn =new PDO("mysql:host=localhost:3306;dbname=btth01_cse485","root","25122019");
                 $data = $conn->query("SELECT * FROM baiviet")->fetchAll();

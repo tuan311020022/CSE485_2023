@@ -32,7 +32,9 @@
         $tendangnhap = $_POST['tendangnhap'];
         $matkhau = $_POST['matkhau'];
 
-        $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8", "root", "");
+        $conn =new PDO("mysql:host=localhost:3306;dbname=btth01_cse485","root","25122019");
+        #CHUNG
+        // $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8", "root", "");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // Kiểm tra đã nhập đủ tên đăng nhập với mật khẩu chưa
         if (!$tendangnhap || !$matkhau) {
