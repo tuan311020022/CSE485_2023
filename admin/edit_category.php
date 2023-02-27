@@ -10,7 +10,46 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
+    
+
     <header>
+    <?php
+        $conn =new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8","root","");
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $url_components = parse_url($url);
+        parse_str($url_components['query'], $params);
+
+
+        $sql3 = "SELECT ten_tloai FROM theloai WHERE ma_tloai= ?";
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->execute([$params['id']]);
+        $data3= $stmt3->fetch();
+        // print_r($data3[0]);    
+        // print_r($params['id']);
+        try {
+            $conn =new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8","root","");
+          // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // if(isset($_POST['update_theloai'])){
+            //     $ma_tloai =$_POST['ma_tloai'];
+            //     $ten_tloai =$_POST['ten_tloai'];
+            // }
+        
+        //   $sql = "UPDATE theloai SET ten_tloai='rap'  WHERE ma_tloai=1";
+        
+          // Prepare statement
+        //   $stmt = $conn->prepare($sql);
+        
+          // execute the query
+        //   $stmt->execute();
+           // echo a message to say the UPDATE succeeded
+            // echo $stmt->rowCount() . "Sửa thành công ";
+        } catch(PDOException $e) {
+          echo $sql . "<br>" . $e->getMessage();
+        }
+        
+        $conn = null;
+    ?>    
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
@@ -47,22 +86,45 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
-                <form action="process_add_category.php" method="post">
-                <div class="input-group mt-3 mb-3">
+                <?php
+                echo   "<form method='post' action='edit_category.php?id=".$params['id']."'>"
+                ?>
+                <!-- <form method="post" action="edit_category.php?id="> -->
+                    <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatId">Mã thể loại</span>
-                        <input type="text" class="form-control" name="txtCatId" readonly value="1">
+                        <?php
+                            echo  "<input type='text' class='form-control' name='ma_tloai' readonly value='".$params['id']."'  >";
+                        ?>
                     </div>
-
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên thể loại</span>
-                        <input type="text" class="form-control" name="txtCatName" value = "Nhạc trữ tình">
+                        <?php
+                        echo "<input type='text' class='form-control' name='ten_tloai' placeholder='".$data3[0]."'>";
+                        ?>
                     </div>
-
                     <div class="form-group  float-end ">
-                        <input type="submit" value="Lưu lại" class="btn btn-success">
+                        <input value="Lưu lại"  class="btn btn-success" type="submit">
+                        
                         <a href="category.php" class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
+                <!-- <p style="color:green" >Lưu thành công</p>  -->
+                <?php
+                    $conn =new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8","root","");
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                        $ma_tloai =$_POST['ma_tloai'];
+                        $ten_tloai =$_POST['ten_tloai'];
+                        // echo $ma_tloai;
+                        // echo $ten_tloai;
+                        $sql = "UPDATE theloai SET ten_tloai='$ten_tloai'  WHERE ma_tloai='$ma_tloai'";   
+                        // Prepare statement
+                        $stmt = $conn->prepare($sql);
+                        // execute the query
+                        $stmt->execute();
+                        echo "<p style='color:green' >Lưu thành công</p> ";
+                    }
+                ?>
             </div>
         </div>
     </main>

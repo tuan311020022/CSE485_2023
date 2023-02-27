@@ -47,10 +47,42 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới thể loại</h3>
-                <form action="process_add_category.php" method="post">
+                <!-- <form action="process_add_category.php" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên thể loại</span>
-                        <input type="text" class="form-control" name="txtCatName" >
+                        <input type="text" class="form-control" name="txtCatName" > -->
+                <?php
+
+                if(isset($POST["Thêm"])){
+                    $conn =new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8","root","");
+                     // set the PDO error mode to exception
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $ma_tloai = $_POST["ma_tloai"];
+                    $ten_tloai = $_POST["ten_tloai"];
+                    if($ma_tloai==""){echo"Vui lòng nhập Mã thể loại! <br />";}
+                            if($ten_tloai==""){echo"Vui lòng nhập Tên thể loại! <br />";}
+                                if($ma_tloai != "" && $ten_tloai != ""){
+                        $sql5 = "INSERT INTO theloai(ma_tloai,ten_tloai) VALUE('$ma_tloai','$ten_tloai')";
+                        // use exec() because no results are returned
+                    $conn->exec($sql5);
+                    
+                    }
+                }
+
+                ?>     
+
+
+                    <form method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="">Mã thể loại</label>
+                    <input type="text" name="ma_tloai" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Tên thể loại</label>
+                    <input type="text" name="ten_tloai" class="form-control">
+                </div>
+               
+                <!-- <button name="sbm" class="btn btn-success" type="submit">Thêm</button> -->
                     </div>
 
                     <div class="form-group  float-end ">

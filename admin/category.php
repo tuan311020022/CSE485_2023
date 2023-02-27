@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="css/style_login.css">
 </head>
 <body>
+        <?php
+        
+
+        try {
+                    $conn =new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8","root","");
+                         // set the PDO error mode to exception
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+                        // sql to delete a record
+                    $sql4 = "DELETE FROM theloai WHERE ma_tloai=";
+        
+                          // use exec() because no results are returned
+                    $conn->exec($sql4);
+                          echo "Record deleted successfully";
+                        } catch(PDOException $e) {
+                        echo $sql4 . "<br>" . $e->getMessage();
+                    }
+        
+        
+                    $conn = null;
+        ?>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
@@ -56,28 +77,31 @@
                             <th>Xóa</th>
                         </tr>
                     </thead>
+                
+
+                
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
-                            <td>
-                                <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Nhạc cách mạng</td>
-                            <td>
-                                <a href="edit_category.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
+                        <?php
+                            $conn =new PDO("mysql:host=localhost;dbname=btth01_cse485;charset=utf8","root","");
+                            $sql = "SELECT *from theloai";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->execute();
+                            $data1 = $stmt->fetchAll();
+                            // print_r($data1);
+                            foreach($data1 as $value){
+                                echo  "<tr>
+                                <th scope='row'>".$value['ma_tloai']."</th>
+                                <td>".$value['ten_tloai']."</td>
+                                <td>
+                                    <a href='edit_category.php?id=".$value['ma_tloai']."'><i class='fa-solid fa-pen-to-square'></i></a>
+                                </td>
+                                <td>
+                                    <a href=''><i class='fa-solid fa-trash'></i></a>
+                                </td>
+                            </tr>";
+                            }
+
+                        ?>
                     </tbody>
                 </table>
             </div>
