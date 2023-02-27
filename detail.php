@@ -58,8 +58,6 @@
             $stmt1->execute([$data['ma_tgia']]);
             $data1 = $stmt1->fetch();
 
-            $stmt
-
             echo    "<div class='row mb-5'>
                         <div class='col-sm-4'>
                             <img src='".$data['hinhanh']."' class='img-fluid' alt='...'>

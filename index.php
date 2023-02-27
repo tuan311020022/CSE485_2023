@@ -81,7 +81,7 @@
                                     <img src='".$row['hinhanh']."' class='card-img-top' alt='...'>
                                     <div class='card-body'>
                                         <h5 class='card-title text-center'>
-                                            <a href='detail.php?id=".$row['ma_bviet']." class='text-decoration-none'>".$row['tieude']."</a>
+                                            <a href='detail.php?id=".$row['ma_bviet']."' class='text-decoration-none'>".$row['tieude']."</a>
                                         </h5>
                                     </div>
                                 </div>
